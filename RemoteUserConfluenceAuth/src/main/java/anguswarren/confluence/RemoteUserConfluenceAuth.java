@@ -70,8 +70,7 @@ public class RemoteUserConfluenceAuth extends ConfluenceAuthenticator {
                 }
 
                 if (remoteuser != null) {
-                    String[] username = remoteuser.split("@");
-                    user = getUser(username[0]);
+                    user = getUser(remoteuser);
                     log.debug("Logging in with username: " + user);
                     request.getSession().setAttribute(ConfluenceAuthenticator.LOGGED_IN_KEY, user);
                     request.getSession().setAttribute(ConfluenceAuthenticator.LOGGED_OUT_KEY, null);
