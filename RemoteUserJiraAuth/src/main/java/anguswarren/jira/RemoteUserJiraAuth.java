@@ -68,8 +68,7 @@ public class RemoteUserJiraAuth extends JiraSeraphAuthenticator {
                 }
 
                 if (remoteuser != null) {
-                    String[] username = remoteuser.split("@");
-                    user = getUser(username[0]);
+                    user = getUser(remoteuser);
                     log.debug("Logging in with username: " + user);
                     request.getSession().setAttribute(JiraSeraphAuthenticator.LOGGED_IN_KEY, user);
                     request.getSession().setAttribute(JiraSeraphAuthenticator.LOGGED_OUT_KEY, null);
