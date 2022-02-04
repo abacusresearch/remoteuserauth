@@ -18,17 +18,23 @@
     <description>This is a custom Seraph filter which authenticates based on the remote_user variable set by Apache or an aribitrary HTTP header set by any web proxy.</description>
     <packaging>atlassian-plugin</packaging>
 
+    <properties>
+        <bamboo.version>6.8.0</bamboo.version>
+        <bamboo.data.version>6.8.0</bamboo.data.version>
+        <amps.version>8.1.2</amps.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.atlassian.bamboo</groupId>
-            <artifactId>atlassian-bamboo</artifactId>
+            <artifactId>atlassian-bamboo-web</artifactId>
             <version>${bamboo.version}</version>
             <scope>provided</scope>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.6</version>
+            <version>4.10</version>
             <scope>test</scope>
         </dependency>
 	<dependency>
@@ -43,7 +49,7 @@
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-bamboo-plugin</artifactId>
+                <artifactId>bamboo-maven-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
@@ -60,11 +66,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <bamboo.version>4.3.2</bamboo.version>
-        <amps.version>6.3.14</amps.version>
-        <bamboo.data.version>4.3</bamboo.data.version>
-    </properties>
-
 </project>
