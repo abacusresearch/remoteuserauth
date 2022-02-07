@@ -29,7 +29,7 @@ import com.atlassian.bamboo.user.authentication.BambooAuthenticator;
 public class RemoteUserBambooAuth extends BambooAuthenticator {
     private static final Category log = Category.getInstance(RemoteUserBambooAuth.class);
 	
-    public Principal getUser(HttpServletRequest request, HttpServletResponse response) {
+    public Principal getUserFromBasicAuthentication(HttpServletRequest request, HttpServletResponse response) {
         Principal user = null;
         try {
             if (request.getSession() != null && request.getSession().getAttribute(BambooAuthenticator.LOGGED_IN_KEY) != null) {
