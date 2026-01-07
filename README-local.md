@@ -19,7 +19,7 @@ Build instructions
     brew install atlassian/tap/atlassian-plugin-sdk
     atlas-version
     ```
-3. Run command `atlas-package` in the RemoteUserConfluenceAuth` directory
+3. Run command `atlas-package` in the `RemoteUserConfluenceAuth` directory
 
 ```shell
 export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64/

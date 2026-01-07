@@ -20,7 +20,7 @@ Build instructions
     brew install atlassian/tap/atlassian-plugin-sdk
     atlas-version
     ```
-3. Run command `atlas-package` in the RemoteUserConfluenceAuth` directory
+3. Run command `atlas-package` in the `RemoteUserConfluenceAuth` directory
 
 
 Installation
