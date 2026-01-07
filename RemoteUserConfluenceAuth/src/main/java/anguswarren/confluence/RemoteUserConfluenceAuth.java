@@ -42,6 +42,7 @@ public class RemoteUserConfluenceAuth extends ConfluenceAuthenticator {
                 try {
                     InputStream iStream = ClassLoaderUtils.getResourceAsStream("RemoteUserConfluenceAuth.properties", this.getClass());
                     p.load(iStream);
+                    iStream.close();
                 } catch (Exception e) {
                     log.debug("Exception loading propertie. The properties file is optional anyway, so this may not be an issues: " + e, e);
                 }
@@ -70,7 +71,17 @@ public class RemoteUserConfluenceAuth extends ConfluenceAuthenticator {
                 }
 
                 if (remoteuser != null) {
-                    user = getUser(remoteuser);
+                    Boolean removeRealm = new Boolean(false);
+                    if (p.getProperty("removeRealm") != null) {
+                        removeRealm = Boolean.parseBoolean(p.getProperty("removeRealm"));
+                    }
+                    if (removeRealm) {
+                        log.debug("Trying to resolve remoteuser: " + remoteuser.split("@")[0]);
+                        user = getUser(remoteuser.split("@")[0]);
+                    } else {
+                        log.debug("Trying to resolve remoteuser: " + remoteuser);
+                        user = getUser(remoteuser);
+                    }
                     log.debug("Logging in with username: " + user);
                     request.getSession().setAttribute(ConfluenceAuthenticator.LOGGED_IN_KEY, user);
                     request.getSession().setAttribute(ConfluenceAuthenticator.LOGGED_OUT_KEY, null);

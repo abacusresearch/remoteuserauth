@@ -40,6 +40,7 @@ public class RemoteUserJiraAuth extends JiraSeraphAuthenticator {
                 try {
                     InputStream iStream = ClassLoaderUtils.getResourceAsStream("RemoteUserJiraAuth.properties", this.getClass());
                     p.load(iStream);
+                    iStream.close();		
                 } catch (Exception e) {
                     log.debug("Exception loading propertie. The properties file is optional anyway, so this may not be an issues: " + e, e);
                 }
@@ -68,7 +69,17 @@ public class RemoteUserJiraAuth extends JiraSeraphAuthenticator {
                 }
 
                 if (remoteuser != null) {
-                    user = getUser(remoteuser);
+                    Boolean removeRealm = new Boolean(false);
+                    if (p.getProperty("removeRealm") != null) {
+                        removeRealm = Boolean.parseBoolean(p.getProperty("removeRealm"));
+                    }
+                    if (removeRealm) {
+                        log.debug("Trying to resolve remoteuser: " + remoteuser.split("@")[0]);
+                        user = getUser(remoteuser.split("@")[0]);
+                    } else {
+                        log.debug("Trying to resolve remoteuser: " + remoteuser);
+                        user = getUser(remoteuser);
+                    }
                     log.debug("Logging in with username: " + user);
                     request.getSession().setAttribute(JiraSeraphAuthenticator.LOGGED_IN_KEY, user);
                     request.getSession().setAttribute(JiraSeraphAuthenticator.LOGGED_OUT_KEY, null);
