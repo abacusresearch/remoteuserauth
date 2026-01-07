@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.atlassian.jira</groupId>
-            <artifactId>atlassian-jira</artifactId>
+            <artifactId>jira-api</artifactId>
             <version>${jira.version}</version>
             <scope>provided</scope>
         </dependency>        
@@ -31,11 +31,18 @@
             <version>4.6</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.atlassian.jira</groupId>
-            <artifactId>jira-func-tests</artifactId>
+            <artifactId>jira-core</artifactId>
             <version>${jira.version}</version>
-            <scope>test</scope>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>jndi</groupId>
+                    <artifactId>jndi</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 	<dependency>
 		<groupId>javax.servlet</groupId>
@@ -49,12 +56,12 @@
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-jira-plugin</artifactId>
+                <artifactId>jira-maven-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
-                    <productDataVersion>${jira.data.version}</productDataVersion>
+                    <productDataVersion>${jira.version}</productDataVersion>
                 </configuration>
             </plugin>
             <plugin>
@@ -68,9 +75,8 @@
     </build>
 
     <properties>
-        <jira.version>4.3.2</jira.version>
-        <amps.version>5.0.13</amps.version>
-        <jira.data.version>4.3</jira.data.version>
+        <jira.version>9.12.2</jira.version>
+        <amps.version>9.1.1</amps.version>
     </properties>
 
 </project>
